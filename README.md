@@ -1,2 +1,2 @@
 # Mike-the-Bird
-SceneKit iOS Game
+SpriteKit iOS 2D Game
