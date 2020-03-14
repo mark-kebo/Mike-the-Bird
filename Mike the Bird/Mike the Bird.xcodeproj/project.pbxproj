@@ -15,6 +15,9 @@
 		0A0BA48A241CEAAA004C3317 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA488241CEAAA004C3317 /* Main.storyboard */; };
 		0A0BA48C241CEAAC004C3317 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA48B241CEAAC004C3317 /* Assets.xcassets */; };
 		0A0BA48F241CEAAC004C3317 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */; };
+		0A0BA498241CF1C5004C3317 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA497241CF1C5004C3317 /* GameElements.swift */; };
+		0A0BA49A241CF28F004C3317 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA499241CF28F004C3317 /* player.atlas */; };
+		0A0BA49C241CF29F004C3317 /* CoinSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		0A0BA48E241CEAAC004C3317 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A0BA490241CEAAC004C3317 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A0BA496241CEB74004C3317 /* Mike the Bird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mike the Bird.entitlements"; sourceTree = "<group>"; };
+		0A0BA497241CF1C5004C3317 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
+		0A0BA499241CF28F004C3317 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
+		0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CoinSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,9 @@
 				0A0BA48B241CEAAC004C3317 /* Assets.xcassets */,
 				0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */,
 				0A0BA490241CEAAC004C3317 /* Info.plist */,
+				0A0BA497241CF1C5004C3317 /* GameElements.swift */,
+				0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */,
+				0A0BA499241CF28F004C3317 /* player.atlas */,
 			);
 			path = "Mike the Bird";
 			sourceTree = "<group>";
@@ -133,6 +142,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A0BA49C241CF29F004C3317 /* CoinSound.mp3 in Resources */,
+				0A0BA49A241CF28F004C3317 /* player.atlas in Resources */,
 				0A0BA48A241CEAAA004C3317 /* Main.storyboard in Resources */,
 				0A0BA481241CEAAA004C3317 /* GameScene.sks in Resources */,
 				0A0BA48C241CEAAC004C3317 /* Assets.xcassets in Resources */,
@@ -148,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A0BA498241CF1C5004C3317 /* GameElements.swift in Sources */,
 				0A0BA485241CEAAA004C3317 /* GameScene.swift in Sources */,
 				0A0BA487241CEAAA004C3317 /* GameViewController.swift in Sources */,
 				0A0BA47F241CEAAA004C3317 /* AppDelegate.swift in Sources */,
