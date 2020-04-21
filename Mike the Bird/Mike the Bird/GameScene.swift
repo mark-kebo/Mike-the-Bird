@@ -183,8 +183,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        if gameStarted == true{
-            if died == false{
+        if gameStarted == true {
+            if died == false {
                 enumerateChildNodes(withName: "background", using: ({
                     (node, error) in
                     let bg = node as! SKSpriteNode
@@ -197,14 +197,3 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

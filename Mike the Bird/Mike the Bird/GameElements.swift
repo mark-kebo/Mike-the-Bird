@@ -56,12 +56,12 @@ extension GameScene{
         scoreLbl.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2 + self.frame.height / 2.6)
         scoreLbl.text = "\(score)"
         scoreLbl.zPosition = 5
-        scoreLbl.fontSize = 50
+        scoreLbl.fontSize = 25
         scoreLbl.fontName = "HelveticaNeue-Bold"
         
         let scoreBg = SKShapeNode()
         scoreBg.position = CGPoint(x: 0, y: 0)
-        scoreBg.path = CGPath(roundedRect: CGRect(x: CGFloat(-50), y: CGFloat(-30), width: CGFloat(100), height: CGFloat(100)), cornerWidth: 50, cornerHeight: 50, transform: nil)
+        scoreBg.path = CGPath(roundedRect: CGRect(x: CGFloat(-25), y: CGFloat(-15), width: CGFloat(50), height: CGFloat(50)), cornerWidth: 50, cornerHeight: 50, transform: nil)
         let scoreBgColor = UIColor(red: CGFloat(0.0 / 255.0), green: CGFloat(0.0 / 255.0), blue: CGFloat(0.0 / 255.0), alpha: CGFloat(0.2))
         scoreBg.strokeColor = UIColor.clear
         scoreBg.fillColor = scoreBgColor
@@ -150,7 +150,7 @@ extension GameScene{
         
         wallPair.zPosition = 1
         
-        let randomPosition = random(min: -200, max: 200)
+        let randomPosition = random(min: -20, max: 20)
         wallPair.position.y = wallPair.position.y +  randomPosition
         wallPair.addChild(flowerNode)
         
