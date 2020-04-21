@@ -17,7 +17,7 @@ struct CollisionBitMask {
 
 extension GameScene{
     func createBird() -> SKSpriteNode {
-        let bird = SKSpriteNode(texture: SKTextureAtlas(named:"player").textureNamed("bird1"))
+        let bird = SKSpriteNode(texture: SKTextureAtlas(named:"player").textureNamed("sultan_flight1"))
         bird.size = CGSize(width: 50, height: 50)
         bird.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
         

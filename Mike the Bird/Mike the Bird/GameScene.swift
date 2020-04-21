@@ -128,10 +128,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //SET UP THE BIRD SPRITES FOR ANIMATION
-        birdSprites.append(birdAtlas.textureNamed("bird1"))
-        birdSprites.append(birdAtlas.textureNamed("bird2"))
-        birdSprites.append(birdAtlas.textureNamed("bird3"))
-        birdSprites.append(birdAtlas.textureNamed("bird4"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight1"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight2"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight3"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight4"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight5"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight6"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight7"))
+        birdSprites.append(birdAtlas.textureNamed("sultan_flight8"))
         
         self.bird = createBird()
         self.addChild(bird)
