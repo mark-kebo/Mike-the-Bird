@@ -45,7 +45,7 @@ extension GameScene{
     
     func createPauseBtn() {
         pauseBtn = SKSpriteNode(imageNamed: "pause")
-        pauseBtn.size = CGSize(width:40, height:40)
+        pauseBtn.size = CGSize(width:blockSize, height:blockSize)
         pauseBtn.position = CGPoint(x: self.frame.width - 30, y: 30)
         pauseBtn.zPosition = 6
         self.addChild(pauseBtn)
@@ -87,7 +87,7 @@ extension GameScene{
     func createLogo() {
         logoImg = SKSpriteNode()
         logoImg = SKSpriteNode(imageNamed: "logo")
-        logoImg.size = CGSize(width: 272, height: 65)
+        logoImg.size.height = 100
         logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 100)
         logoImg.setScale(0.5)
         self.addChild(logoImg)
@@ -107,8 +107,8 @@ extension GameScene{
     
     func createWalls() -> SKNode  {
         let flowerNode = SKSpriteNode(imageNamed: "flower")
-        flowerNode.size = CGSize(width: 40, height: 40)
-        flowerNode.position = CGPoint(x: self.frame.width + 25, y: self.frame.height / 2)
+        flowerNode.size = CGSize(width: blockSize / 2, height: blockSize / 2)
+        flowerNode.position = CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height))
         flowerNode.physicsBody = SKPhysicsBody(rectangleOf: flowerNode.size)
         flowerNode.physicsBody?.affectedByGravity = false
         flowerNode.physicsBody?.isDynamic = false
@@ -119,16 +119,26 @@ extension GameScene{
         
         wallPair = SKNode()
         wallPair.name = "wallPair"
+        wallPair.addChild(flowerNode)
         
+        for index in 0...1 {
+            createTopWall(position: CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height)))
+            createBtmWall(position: CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height)))
+        }
+        
+        wallPair.zPosition = 1
+        
+        wallPair.run(moveAndRemove)
+        
+        return wallPair
+    }
+    
+    func createTopWall(position: CGPoint) {
         let topWall = SKSpriteNode(imageNamed: "pillar")
-        let btmWall = SKSpriteNode(imageNamed: "pillar")
         
-        topWall.position = CGPoint(x: self.frame.width + 25, y: self.frame.height / 2 + 420)
-        btmWall.position = CGPoint(x: self.frame.width + 25, y: self.frame.height / 2 - 420)
-        
-        topWall.setScale(0.5)
-        btmWall.setScale(0.5)
-        
+        topWall.position = position
+        topWall.size = CGSize(width: blockSize, height: blockSize)
+                
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
         topWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
         topWall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
@@ -136,27 +146,25 @@ extension GameScene{
         topWall.physicsBody?.isDynamic = false
         topWall.physicsBody?.affectedByGravity = false
         
+        topWall.zRotation = CGFloat(M_PI)
+        
+        wallPair.addChild(topWall)
+    }
+    
+    func createBtmWall(position: CGPoint) {
+        let btmWall = SKSpriteNode(imageNamed: "pillar")
+        
+        btmWall.position = position
+        btmWall.size = CGSize(width: blockSize, height: blockSize)
+
         btmWall.physicsBody = SKPhysicsBody(rectangleOf: btmWall.size)
         btmWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
         btmWall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
         btmWall.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         btmWall.physicsBody?.isDynamic = false
         btmWall.physicsBody?.affectedByGravity = false
-        
-        topWall.zRotation = CGFloat(M_PI)
-        
-        wallPair.addChild(topWall)
+                
         wallPair.addChild(btmWall)
-        
-        wallPair.zPosition = 1
-        
-        let randomPosition = random(min: -20, max: 20)
-        wallPair.position.y = wallPair.position.y +  randomPosition
-        wallPair.addChild(flowerNode)
-        
-        wallPair.run(moveAndRemove)
-        
-        return wallPair
     }
     
     func random() -> CGFloat{

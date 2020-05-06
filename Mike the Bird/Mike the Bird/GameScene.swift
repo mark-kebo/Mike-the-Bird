@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    let blockSize = 40
+    
     var gameStarted = Bool(false)
     var died = Bool(false)
     let coinSound = SKAction.playSoundFileNamed("CoinSound.mp3", waitForCompletion: false)
@@ -56,17 +58,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let spawnDelayForever = SKAction.repeatForever(SpawnDelay)
             self.run(spawnDelayForever)
             
-            let distance = CGFloat(self.frame.width + wallPair.frame.width)
+            let distance = CGFloat(self.frame.width * 2)
             let movePipes = SKAction.moveBy(x: -distance - 50, y: 0, duration: TimeInterval(0.003 * distance))
             let removePipes = SKAction.removeFromParent()
             moveAndRemove = SKAction.sequence([movePipes, removePipes])
             
             bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 40))
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: blockSize))
         } else {
             if died == false {
                 bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 40))
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: blockSize))
             }
         }
         
