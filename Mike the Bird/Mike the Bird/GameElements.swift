@@ -18,7 +18,7 @@ struct CollisionBitMask {
 extension GameScene{
     func createBird() -> SKSpriteNode {
         let bird = SKSpriteNode(texture: SKTextureAtlas(named:"player").textureNamed("sultan_flight1"))
-        bird.size = CGSize(width: 50, height: 50)
+        bird.size = CGSize(width: 32 * elementScale, height: 32 * elementScale)
         bird.position = CGPoint(x:self.frame.midX, y:self.frame.midY)
         
         bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.width / 2)
@@ -45,7 +45,7 @@ extension GameScene{
     
     func createPauseBtn() {
         pauseBtn = SKSpriteNode(imageNamed: "pause")
-        pauseBtn.size = CGSize(width:blockSize, height:blockSize)
+        pauseBtn.size = CGSize(width: 40, height: 40)
         pauseBtn.position = CGPoint(x: self.frame.width - 30, y: 30)
         pauseBtn.zPosition = 6
         self.addChild(pauseBtn)
@@ -87,7 +87,9 @@ extension GameScene{
     func createLogo() {
         logoImg = SKSpriteNode()
         logoImg = SKSpriteNode(imageNamed: "logo")
-        logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 100)
+        logoImg.size.width = logoImg.frame.width * 0.7 * elementScale
+        logoImg.size.height = logoImg.frame.height * 0.7 * elementScale
+        logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 80)
         logoImg.setScale(0.5)
         self.addChild(logoImg)
         logoImg.run(SKAction.scale(to: 1.0, duration: 0.3))
@@ -106,7 +108,7 @@ extension GameScene{
     
     func createWalls() -> SKNode  {
         let flowerNode = SKSpriteNode(imageNamed: "flower")
-        flowerNode.size = CGSize(width: blockSize / 2, height: blockSize / 2)
+        flowerNode.size = CGSize(width: 20 * elementScale, height: 20 * elementScale)
         flowerNode.position = CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height))
         flowerNode.physicsBody = SKPhysicsBody(rectangleOf: flowerNode.size)
         flowerNode.physicsBody?.affectedByGravity = false
@@ -128,13 +130,13 @@ extension GameScene{
         lastIndex = index
         switch index {
         case 1:
-            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 120))
+            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 80 * elementScale))
         case 2:
-            createBtmWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY - 120))
+            createBtmWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY - 80 * elementScale))
         case 3:
             createWall(position:    CGPoint(x: self.frame.width + pointXBais, y: pointY))
         default:
-            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 120))
+            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 80 * elementScale))
         }
 
         wallPair.zPosition = 1
@@ -178,7 +180,7 @@ extension GameScene{
         let topWall = SKSpriteNode(imageNamed: "tiles3")
         
         topWall.position = position
-        topWall.size = CGSize(width: 64 * elementScale, height: 96 * elementScale)
+        topWall.size = CGSize(width: 64 * elementScale, height: 64 * elementScale)
                 
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
         topWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
@@ -186,9 +188,7 @@ extension GameScene{
         topWall.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         topWall.physicsBody?.isDynamic = false
         topWall.physicsBody?.affectedByGravity = false
-        
-        topWall.zRotation = CGFloat(M_PI)
-        
+                
         wallPair.addChild(topWall)
     }
     
