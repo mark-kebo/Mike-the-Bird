@@ -32,6 +32,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bird = SKSpriteNode()
     var repeatActionbird = SKAction()
     
+    var elementScale: CGFloat = 0
+    var lastIndex = 0
+    
     override func didMove(to view: SKView) {
         createScene()
     }
@@ -39,6 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameStarted == false {
             gameStarted =  true
+            lastIndex = 0
             bird.physicsBody?.affectedByGravity = true
             createPauseBtn()
             logoImg.run(SKAction.scale(to: 0.5, duration: 0.3), completion: {
@@ -46,19 +50,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             })
             taptoplayLbl.removeFromParent()
             self.bird.run(repeatActionbird)
-            
             let spawn = SKAction.run({
                 () in
                 self.wallPair = self.createWalls()
                 self.addChild(self.wallPair)
             })
             
-            let delay = SKAction.wait(forDuration: 1.5)
+            let delay = SKAction.wait(forDuration: 1.1)
             let SpawnDelay = SKAction.sequence([spawn, delay])
             let spawnDelayForever = SKAction.repeatForever(SpawnDelay)
             self.run(spawnDelayForever)
             
-            let distance = CGFloat(self.frame.width * 2)
+            let distance = CGFloat(self.frame.width * 3)
             let movePipes = SKAction.moveBy(x: -distance - 50, y: 0, duration: TimeInterval(0.003 * distance))
             let removePipes = SKAction.removeFromParent()
             moveAndRemove = SKAction.sequence([movePipes, removePipes])
@@ -110,6 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createScene(){
+        elementScale = (self.frame.height / 2)/128
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.categoryBitMask = CollisionBitMask.groundCategory
         self.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
@@ -175,12 +179,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.bird.removeAllActions()
             }
         } else if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.flowerCategory {
-            run(coinSound)
+//            run(coinSound)
             score += 1
             scoreLbl.text = "\(score)"
             secondBody.node?.removeFromParent()
         } else if firstBody.categoryBitMask == CollisionBitMask.flowerCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
-            run(coinSound)
+//            run(coinSound)
             score += 1
             scoreLbl.text = "\(score)"
             firstBody.node?.removeFromParent()

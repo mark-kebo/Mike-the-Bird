@@ -87,7 +87,6 @@ extension GameScene{
     func createLogo() {
         logoImg = SKSpriteNode()
         logoImg = SKSpriteNode(imageNamed: "logo")
-        logoImg.size.height = 100
         logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 100)
         logoImg.setScale(0.5)
         self.addChild(logoImg)
@@ -96,7 +95,7 @@ extension GameScene{
     
     func createTaptoplayLabel() -> SKLabelNode {
         let taptoplayLbl = SKLabelNode()
-        taptoplayLbl.position = CGPoint(x:self.frame.midX, y:self.frame.midY - 100)
+        taptoplayLbl.position = CGPoint(x:self.frame.midX, y:self.frame.midY - 80)
         taptoplayLbl.text = "Tap anywhere to play"
         taptoplayLbl.fontColor = UIColor(red: 63/255, green: 79/255, blue: 145/255, alpha: 1.0)
         taptoplayLbl.zPosition = 5
@@ -116,28 +115,70 @@ extension GameScene{
         flowerNode.physicsBody?.collisionBitMask = 0
         flowerNode.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         flowerNode.color = SKColor.blue
+        flowerNode.zPosition = -1
         
         wallPair = SKNode()
         wallPair.name = "wallPair"
         wallPair.addChild(flowerNode)
+
+        let pointY = self.frame.height / 2
+        let pointXBais = (256 - 64) * elementScale
         
-        for index in 0...1 {
-            createTopWall(position: CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height)))
-            createBtmWall(position: CGPoint(x: random(min: self.frame.width, max: self.frame.width * 2), y: random(min: 0, max: self.frame.height)))
+        let index = randomObstacle(numberOfObstacles: 3, lastObstacle: lastIndex)
+        lastIndex = index
+        switch index {
+        case 1:
+            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 120))
+        case 2:
+            createBtmWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY - 120))
+        case 3:
+            createWall(position:    CGPoint(x: self.frame.width + pointXBais, y: pointY))
+        default:
+            createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 120))
         }
-        
+
         wallPair.zPosition = 1
-        
+        let randomPosition2 = random(min: -15, max: 15)
+        wallPair.position.y = wallPair.position.y +  randomPosition2
         wallPair.run(moveAndRemove)
         
         return wallPair
+
+    }
+
+    func randomObstacle(numberOfObstacles: Int, lastObstacle: Int) -> Int {
+        let temp = Int.random(in: 1 ..< numberOfObstacles)
+        if (temp < lastObstacle) {
+            return temp
+        } else {
+            return temp + 1
+        }
     }
     
+    
     func createTopWall(position: CGPoint) {
-        let topWall = SKSpriteNode(imageNamed: "pillar")
+        let topWall = SKSpriteNode(imageNamed: "tiles1")
         
         topWall.position = position
-        topWall.size = CGSize(width: blockSize, height: blockSize)
+        topWall.size = CGSize(width: elementScale * 64, height: self.frame.height / 2)
+                
+        topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
+        topWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
+        topWall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
+        topWall.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
+        topWall.physicsBody?.isDynamic = false
+        topWall.physicsBody?.affectedByGravity = false
+        
+        topWall.zRotation = CGFloat(M_PI)
+        
+        wallPair.addChild(topWall)
+    }
+    
+    func createWall(position: CGPoint) {
+        let topWall = SKSpriteNode(imageNamed: "tiles3")
+        
+        topWall.position = position
+        topWall.size = CGSize(width: 64 * elementScale, height: 96 * elementScale)
                 
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
         topWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
@@ -152,10 +193,10 @@ extension GameScene{
     }
     
     func createBtmWall(position: CGPoint) {
-        let btmWall = SKSpriteNode(imageNamed: "pillar")
+        let btmWall = SKSpriteNode(imageNamed: "tiles1")
         
         btmWall.position = position
-        btmWall.size = CGSize(width: blockSize, height: blockSize)
+        btmWall.size = CGSize(width: elementScale * 64, height: self.frame.height / 2)
 
         btmWall.physicsBody = SKPhysicsBody(rectangleOf: btmWall.size)
         btmWall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
