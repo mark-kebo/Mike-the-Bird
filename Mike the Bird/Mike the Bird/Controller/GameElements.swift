@@ -148,7 +148,7 @@ extension GameScene{
         flowerNode.physicsBody?.collisionBitMask = 0
         flowerNode.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         flowerNode.color = SKColor.blue
-        flowerNode.zPosition = 61
+        flowerNode.zPosition = -1
         wallPair.addChild(flowerNode)
 
         wallPair.zPosition = 1
