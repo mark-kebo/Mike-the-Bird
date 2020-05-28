@@ -17,7 +17,13 @@
 		0A0BA48F241CEAAC004C3317 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */; };
 		0A0BA498241CF1C5004C3317 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA497241CF1C5004C3317 /* GameElements.swift */; };
 		0A0BA49A241CF28F004C3317 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA499241CF28F004C3317 /* player.atlas */; };
-		0A0BA49C241CF29F004C3317 /* CoinSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */; };
+		0A7D004B247FC7F200E74256 /* main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D004A247FC7F200E74256 /* main.mp3 */; };
+		0A7D0052247FCD4100E74256 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D004E247FCD4100E74256 /* AudioPlayer.swift */; };
+		0A7D0053247FCD4100E74256 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D004F247FCD4100E74256 /* SoundPlayer.swift */; };
+		0A7D0055247FCD4100E74256 /* AppBackgroundMusicPalyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D0051247FCD4100E74256 /* AppBackgroundMusicPalyer.swift */; };
+		0A7D0057247FCD8900E74256 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D0056247FCD8900E74256 /* boom.mp3 */; };
+		0A7D005B247FD43200E74256 /* pong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D005A247FD43200E74256 /* pong.mp3 */; };
+		0A7D005F247FD66200E74256 /* button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D005E247FD66200E74256 /* button.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +40,13 @@
 		0A0BA496241CEB74004C3317 /* Mike the Bird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mike the Bird.entitlements"; sourceTree = "<group>"; };
 		0A0BA497241CF1C5004C3317 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		0A0BA499241CF28F004C3317 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
-		0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CoinSound.mp3; sourceTree = "<group>"; };
+		0A7D004A247FC7F200E74256 /* main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main.mp3; sourceTree = "<group>"; };
+		0A7D004E247FCD4100E74256 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		0A7D004F247FCD4100E74256 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		0A7D0051247FCD4100E74256 /* AppBackgroundMusicPalyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppBackgroundMusicPalyer.swift; sourceTree = "<group>"; };
+		0A7D0056247FCD8900E74256 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		0A7D005A247FD43200E74256 /* pong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pong.mp3; sourceTree = "<group>"; };
+		0A7D005E247FD66200E74256 /* button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = button.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,21 +79,51 @@
 		0A0BA47D241CEAAA004C3317 /* Mike the Bird */ = {
 			isa = PBXGroup;
 			children = (
+				0A7D004D247FCD4100E74256 /* Audio */,
+				0A7D004C247FCCF800E74256 /* Controller */,
+				0A7D0049247FC7DE00E74256 /* Sounds */,
 				0A0BA496241CEB74004C3317 /* Mike the Bird.entitlements */,
 				0A0BA47E241CEAAA004C3317 /* AppDelegate.swift */,
 				0A0BA480241CEAAA004C3317 /* GameScene.sks */,
 				0A0BA482241CEAAA004C3317 /* Actions.sks */,
-				0A0BA484241CEAAA004C3317 /* GameScene.swift */,
-				0A0BA486241CEAAA004C3317 /* GameViewController.swift */,
 				0A0BA488241CEAAA004C3317 /* Main.storyboard */,
 				0A0BA48B241CEAAC004C3317 /* Assets.xcassets */,
 				0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */,
 				0A0BA490241CEAAC004C3317 /* Info.plist */,
-				0A0BA497241CF1C5004C3317 /* GameElements.swift */,
-				0A0BA49B241CF29F004C3317 /* CoinSound.mp3 */,
 				0A0BA499241CF28F004C3317 /* player.atlas */,
 			);
 			path = "Mike the Bird";
+			sourceTree = "<group>";
+		};
+		0A7D0049247FC7DE00E74256 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D005E247FD66200E74256 /* button.mp3 */,
+				0A7D005A247FD43200E74256 /* pong.mp3 */,
+				0A7D0056247FCD8900E74256 /* boom.mp3 */,
+				0A7D004A247FC7F200E74256 /* main.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		0A7D004C247FCCF800E74256 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0A0BA486241CEAAA004C3317 /* GameViewController.swift */,
+				0A0BA484241CEAAA004C3317 /* GameScene.swift */,
+				0A0BA497241CF1C5004C3317 /* GameElements.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0A7D004D247FCD4100E74256 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0A7D004E247FCD4100E74256 /* AudioPlayer.swift */,
+				0A7D004F247FCD4100E74256 /* SoundPlayer.swift */,
+				0A7D0051247FCD4100E74256 /* AppBackgroundMusicPalyer.swift */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,11 +184,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A0BA49C241CF29F004C3317 /* CoinSound.mp3 in Resources */,
 				0A0BA49A241CF28F004C3317 /* player.atlas in Resources */,
 				0A0BA48A241CEAAA004C3317 /* Main.storyboard in Resources */,
 				0A0BA481241CEAAA004C3317 /* GameScene.sks in Resources */,
+				0A7D0057247FCD8900E74256 /* boom.mp3 in Resources */,
 				0A0BA48C241CEAAC004C3317 /* Assets.xcassets in Resources */,
+				0A7D004B247FC7F200E74256 /* main.mp3 in Resources */,
+				0A7D005F247FD66200E74256 /* button.mp3 in Resources */,
+				0A7D005B247FD43200E74256 /* pong.mp3 in Resources */,
 				0A0BA48F241CEAAC004C3317 /* LaunchScreen.storyboard in Resources */,
 				0A0BA483241CEAAA004C3317 /* Actions.sks in Resources */,
 			);
@@ -159,9 +204,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7D0055247FCD4100E74256 /* AppBackgroundMusicPalyer.swift in Sources */,
 				0A0BA498241CF1C5004C3317 /* GameElements.swift in Sources */,
 				0A0BA485241CEAAA004C3317 /* GameScene.swift in Sources */,
+				0A7D0052247FCD4100E74256 /* AudioPlayer.swift in Sources */,
 				0A0BA487241CEAAA004C3317 /* GameViewController.swift in Sources */,
+				0A7D0053247FCD4100E74256 /* SoundPlayer.swift in Sources */,
 				0A0BA47F241CEAAA004C3317 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

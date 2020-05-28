@@ -18,12 +18,22 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="ocX-4T-Hx8">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="umb-Tq-3IX">
+                                <rect key="frame" x="177" y="418" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="P5P-eh-rb3"/>
+                                    <constraint firstAttribute="width" constant="60" id="jvJ-6n-BEC"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ocX-4T-Hx8" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="6Ev-GJ-bG2"/>
+                            <constraint firstItem="umb-Tq-3IX" firstAttribute="centerY" secondItem="ocX-4T-Hx8" secondAttribute="centerY" id="BpO-FN-RI9"/>
                             <constraint firstAttribute="trailing" secondItem="ocX-4T-Hx8" secondAttribute="trailing" id="GIZ-5V-1KW"/>
                             <constraint firstItem="ocX-4T-Hx8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Y2S-zV-R1s"/>
+                            <constraint firstItem="umb-Tq-3IX" firstAttribute="centerX" secondItem="ocX-4T-Hx8" secondAttribute="centerX" id="quj-6g-Xhn"/>
                             <constraint firstAttribute="bottom" secondItem="ocX-4T-Hx8" secondAttribute="bottom" id="tZ0-jb-ebm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -35,6 +45,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="1920" height="1080"/>
+        <image name="bg" width="455" height="256"/>
     </resources>
 </document>

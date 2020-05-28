@@ -11,8 +11,7 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameStarted = Bool(false)
     var died = Bool(false)
-    let coinSound = SKAction.playSoundFileNamed("CoinSound.mp3", waitForCompletion: false)
-    
+
     var score = Int(0)
     var scoreLbl = SKLabelNode()
     var highscoreLbl = SKLabelNode()
@@ -29,8 +28,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bird = SKSpriteNode()
     var repeatActionbird = SKAction()
     
-    var elementScale: CGFloat = 0
+    var elementScale: CGFloat = 1
     var lastIndex = 0
+    
+    private let soundDead = SoundPlayer(.dead)
+    private let soundPong = SoundPlayer(.pong)
+    private let soundButton = SoundPlayer(.button)
+
     
     override func didMove(to view: SKView) {
         createScene()
@@ -38,9 +42,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameStarted == false {
+            runBackgroundMusic()
             gameStarted =  true
             lastIndex = 0
             bird.physicsBody?.affectedByGravity = true
+            let negDelta = CGVector(dx: -self.frame.midX / 2, dy: 0)
+            let action = SKAction.move(by: negDelta, duration: 2)
+            bird.run(action)
             createPauseBtn()
             logoImg.run(SKAction.scale(to: 0.5, duration: 0.3), completion: {
                 self.logoImg.removeFromParent()
@@ -76,6 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.location(in: self)
             if died == true{
                 if restartBtn.contains(location){
+                    soundButton.play()
                     if UserDefaults.standard.object(forKey: "highestScore") != nil {
                         let hscore = UserDefaults.standard.integer(forKey: "highestScore")
                         if hscore < Int(scoreLbl.text!)!{
@@ -88,6 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             } else {
                 if pauseBtn.contains(location){
+                    soundButton.play()
                     if self.isPaused == false{
                         self.isPaused = true
                         pauseBtn.texture = SKTexture(imageNamed: "play")
@@ -170,18 +180,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.removeAllActions()
             }))
             if died == false{
+                stopBackgroundMusic()
                 died = true
                 createRestartBtn()
                 pauseBtn.removeFromParent()
                 self.bird.removeAllActions()
+                soundDead.play()
             }
         } else if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.flowerCategory {
-//            run(coinSound)
+            soundPong.play()
             score += 1
             scoreLbl.text = "\(score)"
             secondBody.node?.removeFromParent()
         } else if firstBody.categoryBitMask == CollisionBitMask.flowerCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
-//            run(coinSound)
+            soundPong.play()
             score += 1
             scoreLbl.text = "\(score)"
             firstBody.node?.removeFromParent()
