@@ -122,22 +122,22 @@ extension GameScene{
         switch index {
         case 1:
             wall = createTopWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY + 80 * elementScale))
-            randomeFlowerPositionY = random(min: 30, max: wall.position.y - wall.size.height / 2 - 30)
+            randomeFlowerPositionY = random(min: 20 * elementScale, max: wall.position.y - wall.size.height / 2 - 20 * elementScale)
         case 2:
             wall = createBtmWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY - 80 * elementScale))
-            randomeFlowerPositionY = random(min: self.frame.height - 30, max: wall.position.y + wall.size.height / 2 + 30)
+            randomeFlowerPositionY = random(min: self.frame.height - 20 * elementScale, max: wall.position.y + wall.size.height / 2 + 20 * elementScale)
         default:
             wall = createWall(position: CGPoint(x: self.frame.width + pointXBais, y: pointY))
             if Bool.random() {
-            randomeFlowerPositionY = random(min: self.frame.height - 30, max: wall.position.y + wall.size.height / 2 + 30)
+            randomeFlowerPositionY = random(min: self.frame.height - 20 * elementScale, max: wall.position.y + wall.size.height / 2 + 20 * elementScale)
             } else {
-                randomeFlowerPositionY = random(min: 30, max: wall.position.y - wall.size.height / 2 - 30)
+                randomeFlowerPositionY = random(min: 20 * elementScale, max: wall.position.y - wall.size.height / 2 - 20 * elementScale)
             }
         }
         wallPair.addChild(wall)
         let flowerNode = SKSpriteNode(imageNamed: "flower")
-        let randomeFlowerPositionX: CGFloat = random(min: wall.position.x - 30, max: wall.position.x + 30)
-        let flowerPosition = CGPoint(x: random(min: wall.position.x - wall.size.width, max: wall.position.x - wall.size.width * 2), y: random(min: 30, max: self.frame.height - 30))
+        let randomeFlowerPositionX: CGFloat = random(min: wall.position.x - 20 * elementScale, max: wall.position.x + 20 * elementScale)
+        let flowerPosition = CGPoint(x: random(min: wall.position.x - wall.size.width, max: wall.position.x - wall.size.width * 2), y: random(min: 20 * elementScale, max: self.frame.height - 20 * elementScale))
         let randomeFlowerPosition = CGPoint(x: randomeFlowerPositionX, y: randomeFlowerPositionY)
         flowerNode.size = CGSize(width: 20 * elementScale, height: 20 * elementScale)
         flowerNode.position = Bool.random() ? randomeFlowerPosition : flowerPosition
