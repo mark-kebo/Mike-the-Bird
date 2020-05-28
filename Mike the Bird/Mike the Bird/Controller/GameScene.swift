@@ -99,9 +99,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if pauseBtn.contains(location){
                     soundButton.play()
                     if self.isPaused == false{
+                        stopBackgroundMusic()
                         self.isPaused = true
                         pauseBtn.texture = SKTexture(imageNamed: "play")
                     } else {
+                        runBackgroundMusic()
                         self.isPaused = false
                         pauseBtn.texture = SKTexture(imageNamed: "pause")
                     }
