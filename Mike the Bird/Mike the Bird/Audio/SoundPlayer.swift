@@ -44,6 +44,7 @@ public final class SoundPlayer: NSObject {
                     self.player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                     self.player?.prepareToPlay()
                     self.player?.play()
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                 }
             } catch {
                 print("Couldn't load file")
