@@ -133,12 +133,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let removePipes = SKAction.removeFromParent()
             moveAndRemove = SKAction.sequence([movePipes, removePipes])
             
-            bird.physicsBody?.velocity = CGVector(dx: 0, dy: 10)
-            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 32 * elementScale * 0.7))
+            bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.width - (elementScale * 13)))
         } else {
             if died == false {
-                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 10)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 32 * elementScale * 0.7))
+                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.width - (elementScale * 13)))
             }
         }
         
