@@ -1,7 +1,5 @@
 # Mike-the-Bird
-SpriteKit iOS 2D Game
------
-SpriteKit, Swift
+SpriteKit iOS 2D Game, Swift
 -----
 
 Krótki opis projektu wraz z zawartymi mechanizmami interakcji gracza z grą
