@@ -25,7 +25,7 @@ extension GameScene{
         bird.physicsBody?.linearDamping = 1.1
         bird.physicsBody?.restitution = 0
         bird.physicsBody?.categoryBitMask = CollisionBitMask.birdCategory
-        bird.physicsBody?.collisionBitMask = CollisionBitMask.pillarCategory | CollisionBitMask.groundCategory
+        bird.physicsBody?.collisionBitMask = CollisionBitMask.groundCategory
         bird.physicsBody?.contactTestBitMask = CollisionBitMask.pillarCategory | CollisionBitMask.flowerCategory | CollisionBitMask.groundCategory
         bird.physicsBody?.affectedByGravity = false
         bird.physicsBody?.isDynamic = true
@@ -46,8 +46,9 @@ extension GameScene{
     func createPauseBtn() {
         pauseBtn = SKSpriteNode(imageNamed: "pause")
         pauseBtn.size = CGSize(width: 40, height: 40)
-        pauseBtn.position = CGPoint(x: self.frame.width - 30, y: 30)
+        pauseBtn.position = CGPoint(x: 30, y: 30)
         pauseBtn.zPosition = 6
+        pauseBtn.alpha = 0.5
         self.addChild(pauseBtn)
     }
     
@@ -170,7 +171,7 @@ extension GameScene{
         
         wall.position = position
         wall.size = CGSize(width: elementScale * 64, height: self.frame.height / 2)
-                
+        wall.alpha = 0.95
         wall.physicsBody = SKPhysicsBody(rectangleOf: wall.size)
         wall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
         wall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
@@ -187,7 +188,7 @@ extension GameScene{
         
         wall.position = position
         wall.size = CGSize(width: 64 * elementScale, height: 64 * elementScale)
-                
+        wall.alpha = 0.95
         wall.physicsBody = SKPhysicsBody(rectangleOf: wall.size)
         wall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
         wall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
@@ -203,7 +204,7 @@ extension GameScene{
         
         wall.position = position
         wall.size = CGSize(width: elementScale * 64, height: self.frame.height / 2)
-
+        wall.alpha = 0.95
         wall.physicsBody = SKPhysicsBody(rectangleOf: wall.size)
         wall.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
         wall.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory

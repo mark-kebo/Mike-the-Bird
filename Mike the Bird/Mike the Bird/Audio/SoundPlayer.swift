@@ -14,6 +14,7 @@ enum SoundAction {
     case appBackground
     case pong
     case button
+    case crash
 
     var filepath: String? {
         switch self {
@@ -25,6 +26,8 @@ enum SoundAction {
             return Bundle.main.path(forResource: "pong", ofType: "mp3")
         case .button:
             return Bundle.main.path(forResource: "button", ofType: "mp3")
+        case .crash:
+            return Bundle.main.path(forResource: "crash", ofType: "mp3")
         }
     }
 }
@@ -37,14 +40,16 @@ public final class SoundPlayer: NSObject {
         soundPath = soundAction.filepath
     }
     
-    func play() {
+    func play(vibration: Bool) {
         DispatchQueue.global(qos: .background).async {
             do {
                 if let path = self.soundPath {
                     self.player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                     self.player?.prepareToPlay()
                     self.player?.play()
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    if vibration {
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    }
                 }
             } catch {
                 print("Couldn't load file")

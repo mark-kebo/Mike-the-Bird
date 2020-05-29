@@ -20,7 +20,7 @@ private class AppBackgroundMusicPlayer {
             if let path = SoundAction.appBackground.filepath {
                 player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                 player?.numberOfLoops = -1
-                player?.volume = 0.5
+                player?.volume = 0.3
                 player?.prepareToPlay()
                 player?.play()
             }
