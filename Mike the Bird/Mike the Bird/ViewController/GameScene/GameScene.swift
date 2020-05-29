@@ -251,7 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 enumerateChildNodes(withName: "background", using: ({
                     (node, error) in
                     let bg = node as! SKSpriteNode
-                    bg.position = CGPoint(x: bg.position.x - 4, y: bg.position.y)
+                    bg.position = CGPoint(x: bg.position.x - 2.5, y: bg.position.y)
                     if bg.position.x <= -bg.size.width {
                         bg.position = CGPoint(x:bg.position.x + bg.size.width * 2, y:bg.position.y)
                     }
