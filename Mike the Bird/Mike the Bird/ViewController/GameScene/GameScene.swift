@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var restartBtn = SKSpriteNode()
     var pauseBtn = SKSpriteNode()
     var logoImg = SKSpriteNode()
-    var wallPair = SKNode()
+    var walls = SKNode()
     var moveAndRemove = SKAction()
     
     //CREATE THE BIRD ATLAS FOR ANIMATION
@@ -57,8 +57,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.bird.run(repeatActionbird)
             let spawn = SKAction.run({
                 () in
-                self.wallPair = self.createWalls()
-                self.addChild(self.wallPair)
+                self.walls = self.createWalls()
+                self.addChild(self.walls)
             })
             
             let delay = SKAction.wait(forDuration: TimeInterval(elementScale * 0.6))

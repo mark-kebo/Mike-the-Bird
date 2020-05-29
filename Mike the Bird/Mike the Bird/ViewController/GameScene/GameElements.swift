@@ -107,8 +107,8 @@ extension GameScene{
     }
     
     func createWalls() -> SKNode  {
-        wallPair = SKNode()
-        wallPair.name = "wallPair"
+        walls = SKNode()
+        walls.name = "wallPair"
 
         let pointY = self.frame.height / 2
         let pointXBais = (256 - 64) * elementScale
@@ -134,13 +134,26 @@ extension GameScene{
                 randomeFlowerPositionY = random(min: 20 * elementScale, max: wall.position.y - wall.size.height / 2 - 20 * elementScale)
             }
         }
-        wallPair.addChild(wall)
-        let flowerNode = SKSpriteNode(imageNamed: "flower")
+        walls.addChild(wall)
         let randomeFlowerPositionX: CGFloat = random(min: wall.position.x - 20 * elementScale, max: wall.position.x + 20 * elementScale)
         let flowerPosition = CGPoint(x: random(min: wall.position.x - wall.size.width, max: wall.position.x - wall.size.width * 2), y: random(min: 20 * elementScale, max: self.frame.height - 20 * elementScale))
         let randomeFlowerPosition = CGPoint(x: randomeFlowerPositionX, y: randomeFlowerPositionY)
+
+        walls.addChild(createFlower(position: Bool.random() ? randomeFlowerPosition : flowerPosition))
+
+        walls.zPosition = 1
+        let randomPosition2 = random(min: -15, max: 15)
+        walls.position.y = walls.position.y +  randomPosition2
+        walls.run(moveAndRemove)
+        
+        return walls
+
+    }
+
+    func createFlower(position: CGPoint) -> SKSpriteNode {
+        let flowerNode = SKSpriteNode(imageNamed: "flower")
         flowerNode.size = CGSize(width: 20 * elementScale, height: 20 * elementScale)
-        flowerNode.position = Bool.random() ? randomeFlowerPosition : flowerPosition
+        flowerNode.position = position
         flowerNode.physicsBody = SKPhysicsBody(rectangleOf: flowerNode.size)
         flowerNode.physicsBody?.affectedByGravity = false
         flowerNode.physicsBody?.isDynamic = false
@@ -149,18 +162,10 @@ extension GameScene{
         flowerNode.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         flowerNode.color = SKColor.blue
         flowerNode.zPosition = -1
-        wallPair.addChild(flowerNode)
-
-        wallPair.zPosition = 1
-        let randomPosition2 = random(min: -15, max: 15)
-        wallPair.position.y = wallPair.position.y +  randomPosition2
-        wallPair.run(moveAndRemove)
-        
-        return wallPair
-
+        return flowerNode
     }
     
-    private func createTopWall(position: CGPoint) -> SKSpriteNode {
+    func createTopWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles1")
         
         wall.position = position
@@ -177,7 +182,7 @@ extension GameScene{
         return wall
     }
     
-    private func createWall(position: CGPoint) -> SKSpriteNode {
+    func createWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles3")
         
         wall.position = position
@@ -193,7 +198,7 @@ extension GameScene{
         return wall
     }
     
-    private func createBtmWall(position: CGPoint) -> SKSpriteNode {
+    func createBtmWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles1")
         
         wall.position = position
