@@ -57,11 +57,11 @@ extension GameScene{
         scoreLbl.text = "\(score)"
         scoreLbl.zPosition = 5
         scoreLbl.fontSize = 25
-        scoreLbl.fontName = "HelveticaNeue-Bold"
+        scoreLbl.fontName = "BitPotion"
         
         let scoreBg = SKShapeNode()
         scoreBg.position = CGPoint(x: 0, y: 0)
-        scoreBg.path = CGPath(roundedRect: CGRect(x: CGFloat(-25), y: CGFloat(-15), width: CGFloat(50), height: CGFloat(50)), cornerWidth: 50, cornerHeight: 50, transform: nil)
+        scoreBg.path = CGPath(roundedRect: CGRect(x: CGFloat(-25), y: CGFloat(-17.5), width: CGFloat(50), height: CGFloat(50)), cornerWidth: 50, cornerHeight: 50, transform: nil)
         let scoreBgColor = UIColor(red: CGFloat(0.0 / 255.0), green: CGFloat(0.0 / 255.0), blue: CGFloat(0.0 / 255.0), alpha: CGFloat(0.2))
         scoreBg.strokeColor = UIColor.clear
         scoreBg.fillColor = scoreBgColor
@@ -79,8 +79,8 @@ extension GameScene{
             highscoreLbl.text = "Highest Score: 0"
         }
         highscoreLbl.zPosition = 5
-        highscoreLbl.fontSize = 15
-        highscoreLbl.fontName = "Helvetica-Bold"
+        highscoreLbl.fontSize = 25
+        highscoreLbl.fontName = "BitPotion"
         return highscoreLbl
     }
     
@@ -101,8 +101,8 @@ extension GameScene{
         taptoplayLbl.text = "Tap anywhere to play"
         taptoplayLbl.fontColor = UIColor(red: 63/255, green: 79/255, blue: 145/255, alpha: 1.0)
         taptoplayLbl.zPosition = 5
-        taptoplayLbl.fontSize = 20
-        taptoplayLbl.fontName = "HelveticaNeue"
+        taptoplayLbl.fontSize = 30
+        taptoplayLbl.fontName = "BitPotion"
         return taptoplayLbl
     }
     
@@ -159,18 +159,8 @@ extension GameScene{
         return wallPair
 
     }
-
-    func randomObstacle(numberOfObstacles: Int, lastObstacle: Int) -> Int {
-        let temp = Int.random(in: 1 ..< numberOfObstacles)
-        if (temp < lastObstacle) {
-            return temp
-        } else {
-            return temp + 1
-        }
-    }
     
-    
-    func createTopWall(position: CGPoint) -> SKSpriteNode {
+    private func createTopWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles1")
         
         wall.position = position
@@ -187,7 +177,7 @@ extension GameScene{
         return wall
     }
     
-    func createWall(position: CGPoint) -> SKSpriteNode {
+    private func createWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles3")
         
         wall.position = position
@@ -203,7 +193,7 @@ extension GameScene{
         return wall
     }
     
-    func createBtmWall(position: CGPoint) -> SKSpriteNode {
+    private func createBtmWall(position: CGPoint) -> SKSpriteNode {
         let wall = SKSpriteNode(imageNamed: "tiles1")
         
         wall.position = position
@@ -218,6 +208,17 @@ extension GameScene{
                 
         return wall
     }
+}
+ 
+extension GameScene {
+    func randomObstacle(numberOfObstacles: Int, lastObstacle: Int) -> Int {
+        let temp = Int.random(in: 1 ..< numberOfObstacles)
+        if (temp < lastObstacle) {
+            return temp
+        } else {
+            return temp + 1
+        }
+    }
     
     func random() -> CGFloat{
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
@@ -226,5 +227,4 @@ extension GameScene{
     func random(min : CGFloat, max : CGFloat) -> CGFloat{
         return random() * (max - min) + min
     }
-
 }

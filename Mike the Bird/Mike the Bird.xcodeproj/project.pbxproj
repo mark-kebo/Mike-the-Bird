@@ -17,6 +17,7 @@
 		0A0BA48F241CEAAC004C3317 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */; };
 		0A0BA498241CF1C5004C3317 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA497241CF1C5004C3317 /* GameElements.swift */; };
 		0A0BA49A241CF28F004C3317 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BA499241CF28F004C3317 /* player.atlas */; };
+		0A759BFE248118090050D3CE /* BitPotion.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A759BFC248117F40050D3CE /* BitPotion.ttf */; };
 		0A7D004B247FC7F200E74256 /* main.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0A7D004A247FC7F200E74256 /* main.mp3 */; };
 		0A7D0052247FCD4100E74256 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D004E247FCD4100E74256 /* AudioPlayer.swift */; };
 		0A7D0053247FCD4100E74256 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D004F247FCD4100E74256 /* SoundPlayer.swift */; };
@@ -40,6 +41,7 @@
 		0A0BA496241CEB74004C3317 /* Mike the Bird.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Mike the Bird.entitlements"; sourceTree = "<group>"; };
 		0A0BA497241CF1C5004C3317 /* GameElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
 		0A0BA499241CF28F004C3317 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
+		0A759BFC248117F40050D3CE /* BitPotion.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BitPotion.ttf; sourceTree = "<group>"; };
 		0A7D004A247FC7F200E74256 /* main.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main.mp3; sourceTree = "<group>"; };
 		0A7D004E247FCD4100E74256 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		0A7D004F247FCD4100E74256 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
@@ -79,20 +81,62 @@
 		0A0BA47D241CEAAA004C3317 /* Mike the Bird */ = {
 			isa = PBXGroup;
 			children = (
+				0A7D004C247FCCF800E74256 /* ViewController */,
+				0A759BF72481141A0050D3CE /* Storyboards */,
 				0A7D004D247FCD4100E74256 /* Audio */,
-				0A7D004C247FCCF800E74256 /* Controller */,
-				0A7D0049247FC7DE00E74256 /* Sounds */,
+				0A759BF5248113BD0050D3CE /* Helpers */,
 				0A0BA496241CEB74004C3317 /* Mike the Bird.entitlements */,
 				0A0BA47E241CEAAA004C3317 /* AppDelegate.swift */,
-				0A0BA480241CEAAA004C3317 /* GameScene.sks */,
-				0A0BA482241CEAAA004C3317 /* Actions.sks */,
-				0A0BA488241CEAAA004C3317 /* Main.storyboard */,
-				0A0BA48B241CEAAC004C3317 /* Assets.xcassets */,
-				0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */,
 				0A0BA490241CEAAC004C3317 /* Info.plist */,
-				0A0BA499241CF28F004C3317 /* player.atlas */,
 			);
 			path = "Mike the Bird";
+			sourceTree = "<group>";
+		};
+		0A759BF5248113BD0050D3CE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0A759BF9248114CE0050D3CE /* Fonts */,
+				0A759BF8248114BB0050D3CE /* Scenes */,
+				0A7D0049247FC7DE00E74256 /* Sounds */,
+				0A0BA499241CF28F004C3317 /* player.atlas */,
+				0A0BA48B241CEAAC004C3317 /* Assets.xcassets */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0A759BF6248113E90050D3CE /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				0A0BA484241CEAAA004C3317 /* GameScene.swift */,
+				0A0BA497241CF1C5004C3317 /* GameElements.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		0A759BF72481141A0050D3CE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0A0BA488241CEAAA004C3317 /* Main.storyboard */,
+				0A0BA48D241CEAAC004C3317 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0A759BF8248114BB0050D3CE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0A0BA480241CEAAA004C3317 /* GameScene.sks */,
+				0A0BA482241CEAAA004C3317 /* Actions.sks */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		0A759BF9248114CE0050D3CE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0A759BFC248117F40050D3CE /* BitPotion.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		0A7D0049247FC7DE00E74256 /* Sounds */ = {
@@ -106,14 +150,13 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		0A7D004C247FCCF800E74256 /* Controller */ = {
+		0A7D004C247FCCF800E74256 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0A759BF6248113E90050D3CE /* GameScene */,
 				0A0BA486241CEAAA004C3317 /* GameViewController.swift */,
-				0A0BA484241CEAAA004C3317 /* GameScene.swift */,
-				0A0BA497241CF1C5004C3317 /* GameElements.swift */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		0A7D004D247FCD4100E74256 /* Audio */ = {
@@ -187,6 +230,7 @@
 				0A0BA49A241CF28F004C3317 /* player.atlas in Resources */,
 				0A0BA48A241CEAAA004C3317 /* Main.storyboard in Resources */,
 				0A0BA481241CEAAA004C3317 /* GameScene.sks in Resources */,
+				0A759BFE248118090050D3CE /* BitPotion.ttf in Resources */,
 				0A7D0057247FCD8900E74256 /* boom.mp3 in Resources */,
 				0A0BA48C241CEAAC004C3317 /* Assets.xcassets in Resources */,
 				0A7D004B247FC7F200E74256 /* main.mp3 in Resources */,
