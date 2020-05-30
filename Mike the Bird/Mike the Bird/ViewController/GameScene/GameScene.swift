@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var score = Int(0)
     var scoreLbl = SKLabelNode()
-    var lifesIndicator: LifesIndicator?
+    var livesIndicator: LivesIndicator?
     var highscoreLbl = SKLabelNode()
     var taptoplayLbl = SKLabelNode()
     var restartBtn = SKSpriteNode()
@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let soundButton = SoundPlayer(.button)
     private let soundCrash = SoundPlayer(.crash)
 
-    var lifes = Int(3)
+    var lives = Int(3)
     var isCrash = false
     
     override func didMove(to view: SKView) {
@@ -98,8 +98,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createLogo()
         taptoplayLbl = createTaptoplayLabel()
         self.addChild(taptoplayLbl)
-        lifesIndicator = LifesIndicator(lifes: lifes, position: CGPoint(x: 30, y: self.frame.height - 22))
-        self.addChild(lifesIndicator!)
+        livesIndicator = LivesIndicator(lives: lives, position: CGPoint(x: 30, y: self.frame.height - 22))
+        self.addChild(livesIndicator!)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -188,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         died = false
         gameStarted = false
         score = 0
-        lifes = 3
+        lives = 3
         createScene()
     }
     
@@ -216,9 +216,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func collision() {
         if !isCrash {
             isCrash = true
-            self.lifes = self.lifes - 1
-            lifesIndicator?.deleteLife()
-            if self.lifes < 0 {
+            self.lives = self.lives - 1
+            livesIndicator?.deleteLive()
+            if self.lives < 0 {
                 self.enumerateChildNodes(withName: "wallPair", using: ({
                     (node, error) in
                     node.speed = 0
