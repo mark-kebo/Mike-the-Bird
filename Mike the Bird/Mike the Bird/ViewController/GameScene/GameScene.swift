@@ -98,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createLogo()
         taptoplayLbl = createTaptoplayLabel()
         self.addChild(taptoplayLbl)
-        livesIndicator = LivesIndicator(lives: lives, position: CGPoint(x: 30, y: self.frame.height - 22))
+        livesIndicator = LivesIndicator(lives: lives, position: CGPoint(x: 30, y: self.frame.height / 2 + self.frame.height / 2.4))
         self.addChild(livesIndicator!)
     }
     
@@ -123,22 +123,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.addChild(self.walls)
             })
             
-            let delay = SKAction.wait(forDuration: TimeInterval(elementScale * 0.6))
+            let delay = SKAction.wait(forDuration: TimeInterval(1.3))
             let SpawnDelay = SKAction.sequence([spawn, delay])
             let spawnDelayForever = SKAction.repeatForever(SpawnDelay)
             self.run(spawnDelayForever)
             
-            let distance = CGFloat(self.frame.width * 3)
-            let movePipes = SKAction.moveBy(x: -distance - 50, y: 0, duration: TimeInterval(0.003 * distance))
+            let distance = CGFloat(self.frame.width * 3 * elementScale)
+            let movePipes = SKAction.moveBy(x: -distance - 50, y: 0, duration: TimeInterval(0.006 / elementScale * distance))
             let removePipes = SKAction.removeFromParent()
             moveAndRemove = SKAction.sequence([movePipes, removePipes])
             
-            bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.width - (elementScale * 13)))
+            bird.physicsBody?.velocity = CGVector(dx: 0, dy: elementScale)
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: self.frame.height * elementScale / 20))
         } else {
             if died == false {
-                bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.width - (elementScale * 13)))
+                bird.physicsBody?.velocity = CGVector(dx: 0, dy: elementScale)
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: self.frame.height * elementScale / 20))
             }
         }
         

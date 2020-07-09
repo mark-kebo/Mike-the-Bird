@@ -73,7 +73,7 @@ extension GameScene{
     
     func createHighscoreLabel() -> SKLabelNode {
         let highscoreLbl = SKLabelNode()
-        highscoreLbl.position = CGPoint(x: self.frame.width - 80, y: self.frame.height - 22)
+        highscoreLbl.position = CGPoint(x: self.frame.width - 80, y: self.frame.height / 2 + self.frame.height / 2.4)
         if let highestScore = UserDefaults.standard.object(forKey: "highestScore"){
             highscoreLbl.text = "Highest Score: \(highestScore)"
         } else {
@@ -88,9 +88,9 @@ extension GameScene{
     func createLogo() {
         logoImg = SKSpriteNode()
         logoImg = SKSpriteNode(imageNamed: "logo")
-        logoImg.size.width = logoImg.frame.width * 0.7 * elementScale
-        logoImg.size.height = logoImg.frame.height * 0.7 * elementScale
-        logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 80)
+        logoImg.size.width = logoImg.frame.width * 0.6 * elementScale
+        logoImg.size.height = logoImg.frame.height * 0.6 * elementScale
+        logoImg.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 50 * elementScale)
         logoImg.setScale(0.5)
         self.addChild(logoImg)
         logoImg.run(SKAction.scale(to: 1.0, duration: 0.3))

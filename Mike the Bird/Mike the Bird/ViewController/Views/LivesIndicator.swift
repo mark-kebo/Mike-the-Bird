@@ -38,7 +38,6 @@ class LivesIndicator: SKNode {
         node.position = position
         node.color = SKColor.blue
         node.zPosition = 5
-        node.alpha = 0.8
         return node
     }
     
