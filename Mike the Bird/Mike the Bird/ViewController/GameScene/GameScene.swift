@@ -108,6 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameStarted =  true
             lastIndex = 0
             bird.physicsBody?.affectedByGravity = true
+            physicsWorld.gravity = CGVector(dx: 0, dy: -7 * elementScale)
             let negDelta = CGVector(dx: -self.frame.midX / 2, dy: 0)
             let action = SKAction.move(by: negDelta, duration: 2)
             bird.run(action)
@@ -128,23 +129,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let spawnDelayForever = SKAction.repeatForever(SpawnDelay)
             self.run(spawnDelayForever)
             
-            let distance = CGFloat(self.frame.width * 3 * elementScale)
+            let distance = CGFloat(self.frame.width * 3)
             let movePipes = SKAction.moveBy(x: -distance - 50, y: 0, duration: TimeInterval(0.006 / elementScale * distance))
             let removePipes = SKAction.removeFromParent()
             moveAndRemove = SKAction.sequence([movePipes, removePipes])
             
-            bird.physicsBody?.velocity = CGVector(dx: 0, dy: elementScale)
-            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: self.frame.height * elementScale / 20))
+            bird.physicsBody?.velocity = CGVector(dx: 0, dy: bird.size.height / 4 * elementScale * elementScale * 0.8)
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.height / 4 * elementScale * elementScale * 0.8))
+            print(elementScale)
         } else {
             if died == false {
-                bird.physicsBody?.velocity = CGVector(dx: 0, dy: elementScale)
-                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: self.frame.height * elementScale / 20))
+                bird.physicsBody?.velocity = CGVector(dx: 0, dy: bird.size.height / 4 * elementScale * elementScale * 0.8)
+                bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: bird.size.height / 4 * elementScale * elementScale * 0.8))
+                print(elementScale)
             }
         }
         
         for touch in touches{
             let location = touch.location(in: self)
-            if died == true{
+            if died == true {
                 if restartBtn.contains(location){
                     soundButton.play(vibration: true)
                     if UserDefaults.standard.object(forKey: "highestScore") != nil {
@@ -160,7 +163,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 if pauseBtn.contains(location){
                     soundButton.play(vibration: true)
-                    if self.isPaused == false{
+                    if self.isPaused == false {
                         pause()
                     } else {
                         start()
