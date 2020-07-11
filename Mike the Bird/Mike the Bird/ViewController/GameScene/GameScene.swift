@@ -40,6 +40,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lives = Int(3)
     var isCrash = false
     
+    var timer: Timer?
+    var isFinished: Bool = false
+    var isFinishedWasPrinted: Bool = false
+    var isFinishedWas: Bool = false
+
     override func didMove(to view: SKView) {
         createScene()
         NotificationCenter.default.addObserver(self, selector: #selector(foregroundNotificationHandler), name: UIApplication.willEnterForegroundNotification, object: nil)
@@ -52,6 +57,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createScene() {
+        timer?.invalidate()
+        isFinished = false
+        isFinishedWasPrinted = false
+        isFinishedWas = false
         elementScale = (self.frame.height / 2)/128
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.categoryBitMask = CollisionBitMask.groundCategory
@@ -102,8 +111,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(livesIndicator!)
     }
     
+    @objc func fireTimer() {
+        isFinished = true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameStarted == false {
+            timer = Timer.scheduledTimer(timeInterval: 20.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
             runBackgroundMusic()
             gameStarted =  true
             lastIndex = 0
@@ -120,8 +134,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.bird.run(repeatActionbird)
             let spawn = SKAction.run({
                 () in
-                self.walls = self.createWalls()
+                guard !self.isFinishedWasPrinted else { return }
+                self.walls = self.isFinished ? self.createFinishLine() : self.createWalls()
                 self.addChild(self.walls)
+                if self.isFinished {
+                    self.isFinishedWasPrinted = true
+                }
             })
             
             let delay = SKAction.wait(forDuration: TimeInterval(1.3))
@@ -217,6 +235,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func collision() {
+        if isFinished && !isFinishedWas {
+            isFinishedWas = true
+            self.enumerateChildNodes(withName: "finish", using: ({
+                (node, error) in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    node.speed = 0
+                    self.removeAllActions()
+                    stopBackgroundMusic()
+                    self.died = true
+                    self.addChild(self.createFinishMessage(count: self.score))
+                    self.bird.removeAllActions()
+                    self.pauseBtn.removeFromParent()
+                    self.soundDead.play(vibration: true)
+                }
+            }))
+            return
+        }
         if !isCrash {
             isCrash = true
             self.lives = self.lives - 1
@@ -230,7 +265,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if self.died == false{
                     stopBackgroundMusic()
                     self.died = true
-                    self.createRestartBtn()
+                    self.createRestartBtn(position: nil)
                     self.pauseBtn.removeFromParent()
                     self.bird.removeAllActions()
                     self.soundDead.play(vibration: true)

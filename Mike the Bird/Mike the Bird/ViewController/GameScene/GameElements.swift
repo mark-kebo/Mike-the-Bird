@@ -33,10 +33,10 @@ extension GameScene{
         return bird
     }
     
-    func createRestartBtn() {
+    func createRestartBtn(position: CGPoint?) {
         restartBtn = SKSpriteNode(imageNamed: "restart")
-        restartBtn.size = CGSize(width:100, height:100)
-        restartBtn.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+        restartBtn.size = CGSize(width:80, height:80)
+        restartBtn.position = position ?? CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
         restartBtn.zPosition = 6
         restartBtn.setScale(0)
         self.addChild(restartBtn)
@@ -107,7 +107,42 @@ extension GameScene{
         return taptoplayLbl
     }
     
-    func createWalls() -> SKNode  {
+    func createFinishLine() -> SKNode {
+        let finish = SKSpriteNode(imageNamed: "finish")
+        finish.name = "finish"
+        let pointXBais = (256 - 64) * elementScale
+        finish.position = CGPoint(x: self.frame.width + pointXBais, y: self.frame.height / 2)
+        finish.size = CGSize(width: elementScale * 32, height: elementScale * 320)
+        finish.alpha = 0.95
+        finish.physicsBody = SKPhysicsBody(rectangleOf: finish.size)
+        finish.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
+        finish.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
+        finish.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
+        finish.physicsBody?.isDynamic = false
+        finish.physicsBody?.affectedByGravity = false
+        finish.run(moveAndRemove)
+
+        return finish
+    }
+    
+    func createFinishMessage(count: Int) -> SKLabelNode {
+        createRestartBtn(position: CGPoint(x: self.frame.midX, y: self.frame.midY - 50))
+        let label = SKLabelNode()
+        label.position = CGPoint(x:self.frame.midX, y:self.frame.midY + 10 * elementScale)
+        label.zPosition = 5
+        label.numberOfLines = 0
+        let string = "Victory!\nYou collected \(count) flowers!"
+        let attrString = NSMutableAttributedString(string: string)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let range = NSRange(location: 0, length: string.count)
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: range)
+        attrString.addAttributes([NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont(name: "BitPotion", size: 30 * elementScale)], range: range)
+        label.attributedText = attrString
+        return label
+    }
+  
+    func createWalls() -> SKNode {
         walls = SKNode()
         walls.name = "wallPair"
 
