@@ -13,6 +13,7 @@ struct CollisionBitMask {
     static let pillarCategory:UInt32 = 0x1 << 1
     static let flowerCategory:UInt32 = 0x1 << 2
     static let groundCategory:UInt32 = 0x1 << 3
+    static let finishCategory:UInt32 = 0x1 << 4
 }
 
 extension GameScene{
@@ -26,7 +27,7 @@ extension GameScene{
         bird.physicsBody?.restitution = 0
         bird.physicsBody?.categoryBitMask = CollisionBitMask.birdCategory
         bird.physicsBody?.collisionBitMask = CollisionBitMask.groundCategory
-        bird.physicsBody?.contactTestBitMask = CollisionBitMask.pillarCategory | CollisionBitMask.flowerCategory | CollisionBitMask.groundCategory
+        bird.physicsBody?.contactTestBitMask = CollisionBitMask.pillarCategory | CollisionBitMask.flowerCategory | CollisionBitMask.groundCategory | CollisionBitMask.finishCategory
         bird.physicsBody?.affectedByGravity = false
         bird.physicsBody?.isDynamic = true
         
@@ -115,7 +116,7 @@ extension GameScene{
         finish.size = CGSize(width: elementScale * 32, height: elementScale * 320)
         finish.alpha = 0.95
         finish.physicsBody = SKPhysicsBody(rectangleOf: finish.size)
-        finish.physicsBody?.categoryBitMask = CollisionBitMask.pillarCategory
+        finish.physicsBody?.categoryBitMask = CollisionBitMask.finishCategory
         finish.physicsBody?.collisionBitMask = CollisionBitMask.birdCategory
         finish.physicsBody?.contactTestBitMask = CollisionBitMask.birdCategory
         finish.physicsBody?.isDynamic = false

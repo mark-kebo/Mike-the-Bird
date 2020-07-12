@@ -217,7 +217,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
 
-        if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.groundCategory || firstBody.categoryBitMask == CollisionBitMask.groundCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
+        if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.finishCategory || firstBody.categoryBitMask == CollisionBitMask.finishCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
+            if isFinished && !isFinishedWas {
+                isFinishedWas = true
+                self.enumerateChildNodes(withName: "finish", using: ({
+                    (node, error) in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        node.speed = 0
+                        self.removeAllActions()
+                        stopBackgroundMusic()
+                        self.died = true
+                        self.addChild(self.createFinishMessage(count: self.score))
+                        self.bird.removeAllActions()
+                        self.pauseBtn.removeFromParent()
+                        self.soundDead.play(vibration: true)
+                    }
+                }))
+            }
+        } else if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.groundCategory || firstBody.categoryBitMask == CollisionBitMask.groundCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
             collision()
         } else if firstBody.categoryBitMask == CollisionBitMask.birdCategory && secondBody.categoryBitMask == CollisionBitMask.pillarCategory || firstBody.categoryBitMask == CollisionBitMask.pillarCategory && secondBody.categoryBitMask == CollisionBitMask.birdCategory {
             collision()
@@ -235,23 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func collision() {
-        if isFinished && !isFinishedWas {
-            isFinishedWas = true
-            self.enumerateChildNodes(withName: "finish", using: ({
-                (node, error) in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    node.speed = 0
-                    self.removeAllActions()
-                    stopBackgroundMusic()
-                    self.died = true
-                    self.addChild(self.createFinishMessage(count: self.score))
-                    self.bird.removeAllActions()
-                    self.pauseBtn.removeFromParent()
-                    self.soundDead.play(vibration: true)
-                }
-            }))
-            return
-        }
+        guard !isFinishedWas else { return }
         if !isCrash {
             isCrash = true
             self.lives = self.lives - 1
