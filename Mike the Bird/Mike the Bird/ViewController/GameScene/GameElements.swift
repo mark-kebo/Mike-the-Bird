@@ -175,8 +175,10 @@ extension GameScene{
         let randomeFlowerPositionX: CGFloat = random(min: wall.position.x - 20 * elementScale, max: wall.position.x + 20 * elementScale)
         let flowerPosition = CGPoint(x: random(min: wall.position.x - wall.size.width, max: wall.position.x - wall.size.width * 2), y: random(min: 20 * elementScale, max: self.frame.height - 20 * elementScale))
         let randomeFlowerPosition = CGPoint(x: randomeFlowerPositionX, y: randomeFlowerPositionY)
-
-        walls.addChild(createFlower(position: Bool.random() ? randomeFlowerPosition : flowerPosition))
+        
+        if Bool.random() {
+            walls.addChild(createFlower(position: Bool.random() ? randomeFlowerPosition : flowerPosition))
+        }
 
         walls.zPosition = 1
         let randomPosition2 = random(min: -15, max: 15)

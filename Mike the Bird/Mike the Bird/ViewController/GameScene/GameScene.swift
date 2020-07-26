@@ -117,7 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameStarted == false {
-            timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 50.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
             runBackgroundMusic()
             gameStarted =  true
             lastIndex = 0
